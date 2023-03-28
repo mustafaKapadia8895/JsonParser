@@ -12,6 +12,8 @@ public static class Main
             tokens.AddRange(Lexer.tokenize(fileStream.ReadLine(), i++));
         }
 
+        var parsed = Parser.parse_value(tokens, 0, out _);
+
         foreach (var token in tokens)
         {
             Console.WriteLine(token.pretty_print());

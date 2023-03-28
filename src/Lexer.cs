@@ -15,7 +15,6 @@ public static class Lexer
     public static List<IToken> tokenize(string s, int line_number = 0)
     {
         var tokens = new List<IToken>();
-        var string_enumerator = s.GetEnumerator();
 
         var i = 0;
 

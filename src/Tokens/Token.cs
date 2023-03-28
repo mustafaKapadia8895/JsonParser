@@ -1,6 +1,6 @@
-public class Token<T> : IToken
+public abstract class Token : IToken
 {
-    public Token(int line_number, int start_index, int end_index, T value)
+    public Token(int line_number, int start_index, int end_index, object value)
     {
         this.line_number = line_number;
         this.start_index = start_index;
@@ -12,11 +12,11 @@ public class Token<T> : IToken
     public int start_index { get; set; }
     public int end_index { get; set; }
 
-    public T value { get; set; }
+    public object value { get; set; }
 
-    public Type get_type()
+    public object get_value_as_object()
     {
-        return typeof(T);
+        return value;
     }
 
     public string pretty_print()
