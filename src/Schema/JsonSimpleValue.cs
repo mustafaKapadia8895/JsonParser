@@ -4,6 +4,6 @@ public class JsonSimpleValue : JsonValue
 {
     public JsonSimpleValue(object value) : base(value)
     {
-        Debug.Assert(value is string or long or double or bool);
+        Debug.Assert(value is null or string or long or double or bool);
     }
 }

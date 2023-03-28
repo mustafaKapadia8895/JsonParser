@@ -49,6 +49,10 @@ public static class Lexer
             {
                 tokens.Add(read_false());
             }
+            else if (character == 'n')
+            {
+                tokens.Add(read_null());
+            }
             else
             {
                 // unrecognized character
@@ -100,7 +104,15 @@ public static class Lexer
                 var maybe_false = s.Substring(i, 5);
                 Debug.Assert(!bool.Parse(maybe_false));
                 i += 5;
-                return new BoolToken(line_number, start_index, i - 1, false); ;
+                return new BoolToken(line_number, start_index, i - 1, false);
+            }
+            IToken read_null()
+            {
+                var start_index = i;
+                var maybe_null = s.Substring(i, 4);
+                Debug.Assert(maybe_null == "null");
+                i += 4;
+                return new NullToken(line_number, start_index, i - 1);
             }
 
             IToken read_string()

@@ -95,67 +95,27 @@ public static class Parser
         );
     }
 
-    public static bool is_simple_value(object value)
-    {
-        return value is string or long or double or bool;
-    }
-    public static bool is_object_start(object value)
+    public static bool is_simple_value(object value) => value is null or string or long or double or bool;
+
+    public static bool is_symbol_of_type(object value, Symbol symbol)
     {
         if (value.GetType() == typeof(Symbol))
         {
-            return ((Symbol)value) == Symbol.OBJECT_START;
+            return ((Symbol)value) == symbol;
         }
 
         return false;
     }
 
-    public static bool is_object_end(object value)
-    {
-        if (value.GetType() == typeof(Symbol))
-        {
-            return ((Symbol)value) == Symbol.OBJECT_END;
-        }
+    public static bool is_object_start(object value) => is_symbol_of_type(value, Symbol.OBJECT_START);
 
-        return false;
-    }
+    public static bool is_object_end(object value) => is_symbol_of_type(value, Symbol.OBJECT_END);
 
-    public static bool is_array_start(object value)
-    {
-        if (value.GetType() == typeof(Symbol))
-        {
-            return ((Symbol)value) == Symbol.ARRAY_START;
-        }
+    public static bool is_array_start(object value) => is_symbol_of_type(value, Symbol.ARRAY_START);
 
-        return false;
-    }
+    public static bool is_array_end(object value) => is_symbol_of_type(value, Symbol.ARRAY_END);
 
-    public static bool is_array_end(object value)
-    {
-        if (value.GetType() == typeof(Symbol))
-        {
-            return ((Symbol)value) == Symbol.ARRAY_END;
-        }
+    public static bool is_colon(object value) => is_symbol_of_type(value, Symbol.COLON);
 
-        return false;
-    }
-
-    public static bool is_colon(object value)
-    {
-        if (value.GetType() == typeof(Symbol))
-        {
-            return ((Symbol)value) == Symbol.COLON;
-        }
-
-        return false;
-    }
-
-    public static bool is_comma(object value)
-    {
-        if (value.GetType() == typeof(Symbol))
-        {
-            return ((Symbol)value) == Symbol.COMMA;
-        }
-
-        return false;
-    }
+    public static bool is_comma(object value) => is_symbol_of_type(value, Symbol.COMMA);
 }
